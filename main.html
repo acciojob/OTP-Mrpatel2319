@@ -3,28 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>OTP Verification</title>
+    <title>Verification</title>
+    <style>
+        #verification_heading {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #verification_subtext {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .code-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .code {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin: 5px;
+            border: 2px solid #000;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1 id="verification_heading">Verify Your Account</h1>
-        <p id="verification_subtext">
-            We emailed you the six digit code to acciojob@email.com. Enter the code below to confirm your email address.
-        </p>
-        <div class="code-container">
-            <input type="text" maxlength="1" class="code" />
-            <input type="text" maxlength="1" class="code" />
-            <input type="text" maxlength="1" class="code" />
-            <input type="text" maxlength="1" class="code" />
-            <input type="text" maxlength="1" class="code" />
-            <input type="text" maxlength="1" class="code" />
-        </div>
-        <p class="note">
-            This is design only. We didn't actually send you an email as we don't have your email, right?
-        </p>
+    <h1 id="verification_heading">Verify Your Account</h1>
+    <p id="verification_subtext">Please enter the 6-digit code sent to your device</p>
+    <div class="code-container">
+        <input type="text" id="code-1" class="code" maxlength="1">
+        <input type="text" id="code-2" class="code" maxlength="1">
+        <input type="text" id="code-3" class="code" maxlength="1">
+        <input type="text" id="code-4" class="code" maxlength="1">
+        <input type="text" id="code-5" class="code" maxlength="1">
+        <input type="text" id="code-6" class="code" maxlength="1">
     </div>
 
-    <script type="text/javascript" src="./script.js"></script>
+    <script>
+        const inputs = document.querySelectorAll('.code');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value !== '') {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && index > 0 && input.value === '') {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        inputs[0].focus();
+    </script>
 </body>
 </html>
